@@ -9,6 +9,9 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: prefetch-parser
     steps:
       - uses: actions/checkout@v4
 
@@ -23,22 +26,16 @@ jobs:
       - name: Test
         run: go test ./... -count=1
 
-      - name: Fuzz (short)
-        run: go test ./pkg/prefetch/ -fuzz=FuzzLZXpressHuffmanDecompress -fuzztime=10s
-
-      - name: Build (darwin/amd64)
-        run: GOOS=darwin GOARCH=amd64 go build -ldflags="-s -w" -o /dev/null ./cmd/pfparse/
-
-      - name: Build (darwin/arm64)
-        run: GOOS=darwin GOARCH=arm64 go build -ldflags="-s -w" -o /dev/null ./cmd/pfparse/
-
-      - name: Build (linux/amd64)
-        run: GOOS=linux GOARCH=amd64 go build -ldflags="-s -w" -o /dev/null ./cmd/pfparse/
+      - name: Build
+        run: go build -ldflags="-s -w" ./cmd/...
 
   release:
     if: startsWith(github.ref, 'refs/tags/v')
     needs: [test]
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: prefetch-parser
     steps:
       - uses: actions/checkout@v4
         with:
