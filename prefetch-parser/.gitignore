@@ -1,0 +1,6 @@
+bin/
+dist/
+*.test
+*.prof
+*.out
+.DS_Store
