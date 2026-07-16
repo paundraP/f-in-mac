@@ -4,8 +4,6 @@ set -e
 # install.sh — install pfparse to /usr/local/bin
 #
 # Usage:
-#   curl -sfL https://github.com/<owner>/pfparse/releases/latest/download/install.sh | sh
-#   # or locally:
 #   ./install.sh
 
 BINARY="pfparse"
@@ -38,7 +36,7 @@ elif command -v go >/dev/null 2>&1; then
 else
     echo "No local build found for ${OS}/${ARCH} and Go is not installed."
     echo "Download a pre-built release from:"
-    echo "  https://github.com/<owner>/pfparse/releases"
+    echo "  https://github.com/paundraP/f-in-mac/releases"
     exit 1
 fi
 

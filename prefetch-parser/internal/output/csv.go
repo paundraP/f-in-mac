@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"io"
 	"strconv"
-	"strings"
 )
 
 func WriteCSV(w io.Writer, records []PrefetchRecord) error {
@@ -93,9 +92,3 @@ func WriteDetailedCSV(w io.Writer, records []PrefetchRecord) error {
 	return cw.Error()
 }
 
-func loadedFilesString(files []string) string {
-	if len(files) > 100 {
-		return strings.Join(files[:100], "|") + fmt.Sprintf("... (%d more)", len(files)-100)
-	}
-	return strings.Join(files, "|")
-}
